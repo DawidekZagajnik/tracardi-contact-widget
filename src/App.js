@@ -2,6 +2,8 @@ import React from 'react';
 import "regenerator-runtime/runtime";
 import { Snackbar, Button, SnackbarContent, Box, TextField, Typography, IconButton, CircularProgress } from "@material-ui/core";
 import { CloseOutlined } from "@material-ui/icons";
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css';
 
 function App({domElement}) {
 
@@ -119,26 +121,56 @@ function App({domElement}) {
                         >
                             <Typography variant="subtitle1" color="inherit">{message}</Typography>
                         </Box>
-                        <Box
-                            sx={{
-                                marginRight: 75,
-                                marginBottom: validData ? 24 : 0
-                            }}
-                        >
-                            <TextField 
-                            helperText={validData ? "" : "Given contact data is invalid."}
-                            error={!validData}
-                            fullWidth={true} 
-                            placeholder={placeholder} 
-                            variant="standard" 
-                            size="small"
-                            InputProps={{
-                                style: {
-                                    color: darkTheme ? "#ffffff" : "#343434"
-                                }
-                            }}
-                            onChange={event =>  setContactData(event.target.value.replaceAll(" ", ""))}
-                            /> 
+                        <Box>
+                        {
+                        contactType === "phone" ? 
+                            <Box
+                                sx={{
+                                    marginBottom: 0
+                                }}
+                            >
+                                <PhoneInput 
+                                    value={contactData}
+                                    onChange={phone => setContactData(phone)}
+                                    InputProps={{
+                                        color: 'red'
+                                    }}
+                                />
+                                <Box
+                                    sx={{
+                                        marginBottom: validData ? 26 : 0
+                                    }}
+                                >
+                                    <p style={{ 
+                                        color: "red", 
+                                        marginBottom: 0, 
+                                        marginTop: 11, 
+                                        font: "13px Arial, sans-serif" }}>{validData ? "" : "Given phone number is invalid."}</p>
+                                </Box>
+                            </Box>
+                            :
+                            <Box
+                                sx={{
+                                    marginRight: 75,
+                                    marginBottom: validData ? 24 : 0
+                                }}
+                            >
+                                <TextField 
+                                helperText={validData ? "" : "Given contact data is invalid."}
+                                error={!validData}
+                                fullWidth={true} 
+                                placeholder={placeholder} 
+                                variant="standard" 
+                                size="small"
+                                InputProps={{
+                                    style: {
+                                        color: darkTheme ? "#ffffff" : "#343434"
+                                    }
+                                }}
+                                onChange={event =>  setContactData(event.target.value.replaceAll(" ", ""))}
+                                /> 
+                            </Box>
+                            }
                         </Box>
                         <Box
                             sx={{
