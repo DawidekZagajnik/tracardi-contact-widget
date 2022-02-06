@@ -29,11 +29,11 @@ function App({domElement}) {
 
     if (contactType === "email") {
         placeholder = "Email address";
-        regex = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+        regex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
     }
     else if (contactType === "phone") {
         placeholder = "Phone number";
-        regex = "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$";
+        regex = /^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/;
     }
 
     const sendEvent = async () => {
@@ -41,6 +41,7 @@ function App({domElement}) {
         if (contactData.match(regex) != null) {
             setSending(true);
             setValidData(true);
+            console.log(`Calling ${apiUrl}/track`)
             const response = await fetch(`${apiUrl}/track`, {
                 method: "POST",
                 headers: {
@@ -132,9 +133,6 @@ function App({domElement}) {
                                 <PhoneInput 
                                     value={contactData}
                                     onChange={phone => setContactData(phone)}
-                                    InputProps={{
-                                        color: 'red'
-                                    }}
                                 />
                                 <Box
                                     sx={{
