@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-const widgetName = 'tracardi-uix-your-name'
+const widgetName = 'tracardi-uix-contact-widget'
 const widgetDivs = document.querySelectorAll('.'+widgetName)
 
 widgetDivs.forEach(Div => {
