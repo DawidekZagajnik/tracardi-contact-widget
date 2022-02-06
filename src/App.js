@@ -133,6 +133,7 @@ function App({domElement}) {
                                 <PhoneInput 
                                     value={contactData}
                                     onChange={phone => setContactData(phone)}
+                                    dropdownStyle={{color: "black", bottom: 33}}  // For buttom position add this
                                 />
                                 <Box
                                     sx={{
